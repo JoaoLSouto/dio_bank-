@@ -1,0 +1,35 @@
+[project]
+name = "api_com_flask"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "joaolsouto",email = "contato.joaolsouto@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12,<4"
+dependencies = [
+    "flask (>=3.1.2,<4.0.0)",
+    "flask-sqlalchemy (>=3.0)",
+    "flask-migrate",
+    "flask-jwt-extended",
+    "pytest",
+    "pytest-mock",
+    "psycopg2-binary",
+    "gunicorn"
+]
+[tool.pytest]
+minversion = "9.0"
+addopts = ["-ra", "-q"]
+testpaths = [
+    "tests",
+    "integration",
+]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry]
+name = "api-com-flask"
+version = "0.1.0"
+package-mode = false
