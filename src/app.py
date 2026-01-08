@@ -1,9 +1,8 @@
 import os
 from datetime import datetime
 
-import click
 import sqlalchemy as sa
-from flask import Flask, current_app
+from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -18,6 +17,7 @@ jwt = JWTManager()
 # =========================
 # MODELS
 # =========================
+
 
 class Role(db.Model):
     id: Mapped[int] = mapped_column(sa.Integer, primary_key=True)
@@ -42,28 +42,15 @@ class Post(db.Model):
     id: Mapped[int] = mapped_column(sa.Integer, primary_key=True)
     title: Mapped[str] = mapped_column(sa.String, nullable=False)
     body: Mapped[str] = mapped_column(sa.String, nullable=False)
-    created: Mapped[datetime] = mapped_column(
-        sa.DateTime, server_default=sa.func.now()
-    )
+    created: Mapped[datetime] = mapped_column(sa.DateTime, server_default=sa.func.now())
 
     author_id: Mapped[int] = mapped_column(sa.ForeignKey("user.id"))
 
 
 # =========================
-# CLI COMMAND
-# =========================
-
-@click.command("init-db")
-def init_db_command():
-    """Clear the existing data and create new tables."""
-    with current_app.app_context():
-        db.create_all()
-    click.echo("Initialized the database.")
-
-
-# =========================
 # APP FACTORY
 # =========================
+
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
@@ -90,10 +77,9 @@ def create_app(test_config=None):
     migrate.init_app(app, db)
     jwt.init_app(app)
 
-    app.cli.add_command(init_db_command)
-
     # blueprints
     from src.controllers import user, auth, role
+
     app.register_blueprint(user.app)
     app.register_blueprint(auth.app)
     app.register_blueprint(role.app)
