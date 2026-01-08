@@ -12,8 +12,6 @@ dependencies = [
     "flask-sqlalchemy (>=3.0)",
     "flask-migrate",
     "flask-jwt-extended",
-    "pytest",
-    "pytest-mock",
     "psycopg2-binary",
     "gunicorn"
 ]
@@ -33,3 +31,8 @@ build-backend = "poetry.core.masonry.api"
 name = "api-com-flask"
 version = "0.1.0"
 package-mode = false
+
+[dependency-groups]
+"devpytest=*" = [
+    "pytest-mock"
+]
