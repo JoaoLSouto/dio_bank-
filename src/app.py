@@ -1,55 +1,11 @@
 import os
-from datetime import datetime
-
-import sqlalchemy as sa
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-
-from src.db import db  # 👈 db vem de um lugar só
-
+from src.models import db
 
 migrate = Migrate()
 jwt = JWTManager()
-
-
-# =========================
-# MODELS
-# =========================
-
-
-class Role(db.Model):
-    id: Mapped[int] = mapped_column(sa.Integer, primary_key=True)
-    name: Mapped[str] = mapped_column(sa.String, nullable=False)
-
-    users: Mapped[list["User"]] = relationship(back_populates="role")
-
-
-class User(db.Model):
-    id: Mapped[int] = mapped_column(sa.Integer, primary_key=True)
-    username: Mapped[str] = mapped_column(sa.String, unique=True)
-    password: Mapped[str] = mapped_column(sa.String, nullable=False)
-
-    role_id: Mapped[int] = mapped_column(sa.ForeignKey("role.id"))
-    role: Mapped["Role"] = relationship(back_populates="users")
-
-    def __repr__(self) -> str:
-        return f"User(id={self.id}, username={self.username})"
-
-
-class Post(db.Model):
-    id: Mapped[int] = mapped_column(sa.Integer, primary_key=True)
-    title: Mapped[str] = mapped_column(sa.String, nullable=False)
-    body: Mapped[str] = mapped_column(sa.String, nullable=False)
-    created: Mapped[datetime] = mapped_column(sa.DateTime, server_default=sa.func.now())
-
-    author_id: Mapped[int] = mapped_column(sa.ForeignKey("user.id"))
-
-
-# =========================
-# APP FACTORY
-# =========================
 
 
 def create_app(test_config=None):
