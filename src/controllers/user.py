@@ -3,7 +3,7 @@ from http import HTTPStatus
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required
 from sqlalchemy import inspect
-from ..models.models import User, db
+from ..models import User, db
 from ..utils import requires_role
 
 app = Blueprint("user", __name__, url_prefix="/users")

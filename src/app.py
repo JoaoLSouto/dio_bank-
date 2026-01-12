@@ -2,7 +2,7 @@ import os
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
-from .models.models import db
+from .models import db
 
 migrate = Migrate()
 jwt = JWTManager()
