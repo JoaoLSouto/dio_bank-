@@ -2,7 +2,7 @@ import os
 from flask import Flask
 from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
-from src.models.models import db
+from .models.models import db
 
 migrate = Migrate()
 jwt = JWTManager()
@@ -34,7 +34,7 @@ def create_app(test_config=None):
     jwt.init_app(app)
 
     # blueprints
-    from src.controllers import user, auth, role
+    from .controllers import user, auth, role
 
     app.register_blueprint(user.app)
     app.register_blueprint(auth.app)
