@@ -1,5 +1,5 @@
 [project]
-name = "api_com_flask"
+name = "diobank"
 version = "0.1.0"
 description = ""
 authors = [
