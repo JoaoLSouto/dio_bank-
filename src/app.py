@@ -1,5 +1,5 @@
 import os
-from flask import Flask
+from flask import Flask, json
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
@@ -45,4 +45,18 @@ def create_app(environment=None):
     app.register_blueprint(auth.app)
     app.register_blueprint(role.app)
 
+    from werkzeug.exceptions import HTTPException
+
+    @app.errorhandler(HTTPException)
+    def handle_exception(e):
+        response = e.get_response()
+        response.data = json.dumps(
+            {
+                "code": e.code,
+                "name": e.name,
+                "description": e.description,
+            }
+        )
+        response.content_type = "application/json"
+        return response
     return app
