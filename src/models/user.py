@@ -10,7 +10,7 @@ class User(db.Model):
     password: Mapped[str] = mapped_column(sa.String, nullable=False)
 
     role_id: Mapped[int] = mapped_column(sa.ForeignKey("role.id"))
-    role: Mapped["role.Role"] = relationship(back_populates="users")
+    role: Mapped["Role"] = relationship(back_populates="users")
 
     def __repr__(self) -> str:
         return f"User(id={self.id}, username={self.username})"
