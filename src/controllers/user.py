@@ -6,7 +6,7 @@ from sqlalchemy import inspect
 from ..models import User, db
 from ..utils import requires_role
 from ..app import bcrypt
-
+from ..views.user import UserSchema
 
 app = Blueprint("user", __name__, url_prefix="/users")
 
@@ -25,14 +25,16 @@ def _create_user():
 def _list_users():
     query = db.select(User)
     users = db.session.execute(query).scalars()
-    return [
-        {
-            "id": user.id,
-            "username": user.username,
-            "role": {"id": user.role.id, "name": user.role.name},
-        }
-        for user in users
-    ]
+    users_schema = UserSchema(many=True)
+    return users_schema.dump(users)
+    # return [
+    #     {
+    #         "id": user.id,
+    #         "username": user.username,
+    #         "role": {"id": user.role.id, "name": user.role.name},
+    #     }
+    #     for user in users
+    # ]
 
 
 @app.route("/", methods=["GET", "POST"])

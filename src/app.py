@@ -6,11 +6,12 @@ from flask_migrate import Migrate
 from .config import DevelopmentConfig, ProductionConfig, TestingConfig
 from .models import db
 from .config import DevelopmentConfig, ProductionConfig
+from flask_marshmallow import Marshmallow
 
 migrate = Migrate()
 jwt = JWTManager()
 bcrypt = Bcrypt()
-
+ma = Marshmallow()
 
 def create_app(environment=None):
     if environment is None:
@@ -37,7 +38,8 @@ def create_app(environment=None):
     migrate.init_app(app, db)
     jwt.init_app(app)
     bcrypt.init_app(app)
-
+    ma.init_app(app)
+    
     # blueprints
     from .controllers import user, auth, role
 

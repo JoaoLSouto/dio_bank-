@@ -198,6 +198,28 @@ Werkzeug = ">=0.14"
 asymmetric-crypto = ["cryptography (>=3.3.1)"]
 
 [[package]]
+name = "flask-marshmallow"
+version = "1.3.0"
+description = "Flask + marshmallow for beautiful APIs"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "flask_marshmallow-1.3.0-py3-none-any.whl", hash = "sha256:c0a0644b46406851873ab41c1e8a7de3ef27fa69b00b89bf630f1696ec0813a0"},
+    {file = "flask_marshmallow-1.3.0.tar.gz", hash = "sha256:27a35d0ce5dcba161cc5f2f4764afbc2536c93fa439a793250b827835e3f3be6"},
+]
+
+[package.dependencies]
+Flask = ">=2.2"
+marshmallow = ">=3.0.0"
+
+[package.extras]
+dev = ["flask-marshmallow[tests]", "pre-commit (>=3.5,<5.0)", "tox"]
+docs = ["Sphinx (==8.1.3)", "marshmallow-sqlalchemy (>=0.19.0)", "sphinx-issues (==5.0.0)"]
+sqlalchemy = ["flask-sqlalchemy (>=3.0.0)", "marshmallow-sqlalchemy (>=0.29.0)"]
+tests = ["flask-marshmallow[sqlalchemy]", "pytest"]
+
+[[package]]
 name = "flask-migrate"
 version = "4.1.0"
 description = "SQLAlchemy database migrations for Flask applications using Alembic."
@@ -479,6 +501,23 @@ files = [
     {file = "markupsafe-3.0.3-cp39-cp39-win_arm64.whl", hash = "sha256:38664109c14ffc9e7437e86b4dceb442b0096dfe3541d7864d9cbe1da4cf36c8"},
     {file = "markupsafe-3.0.3.tar.gz", hash = "sha256:722695808f4b6457b320fdc131280796bdceb04ab50fe1795cd540799ebe1698"},
 ]
+
+[[package]]
+name = "marshmallow"
+version = "4.2.0"
+description = "A lightweight library for converting complex datatypes to and from native Python datatypes."
+optional = false
+python-versions = ">=3.10"
+groups = ["main"]
+files = [
+    {file = "marshmallow-4.2.0-py3-none-any.whl", hash = "sha256:1dc369bd13a8708a9566d6f73d1db07d50142a7580f04fd81e1c29a4d2e10af4"},
+    {file = "marshmallow-4.2.0.tar.gz", hash = "sha256:908acabd5aa14741419d3678d3296bda6abe28a167b7dcd05969ceb8256943ac"},
+]
+
+[package.extras]
+dev = ["marshmallow[tests]", "pre-commit (>=3.5,<5.0)", "tox"]
+docs = ["autodocsumm (==0.2.14)", "furo (==2025.12.19)", "sphinx (==8.2.3)", "sphinx-copybutton (==0.5.2)", "sphinx-issues (==5.0.1)", "sphinxext-opengraph (==0.13.0)"]
+tests = ["pytest", "simplejson"]
 
 [[package]]
 name = "packaging"
@@ -782,4 +821,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<4"
-content-hash = "c3ee66bd33e83f09a6cc415bf6e26828643ae434dfbbe135ee4afa7a19d8683a"
+content-hash = "86b658d5cc07b76bb471a757f8f4be5f3b2475a45ca32e8389f8884a98f44cd8"

@@ -14,7 +14,8 @@ dependencies = [
     "flask-jwt-extended",
     "psycopg2-binary",
     "gunicorn",
-    "flask-bcrypt"
+    "flask-bcrypt",
+    "flask-marshmallow"
 ]
 [tool.pytest]
 minversion = "9.0"
