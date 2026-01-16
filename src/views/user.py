@@ -1,5 +1,4 @@
 from ..app import ma
-from ..views.role import RoleSchema
 from marshmallow import fields
 
 
