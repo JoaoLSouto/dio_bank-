@@ -6,13 +6,20 @@ from sqlalchemy import inspect
 from ..models import User, db
 from ..utils import requires_role
 from ..app import bcrypt
-from ..views.user import UserSchema
+from ..views.user import UserSchema, CreateUserSchema
+from marshmallow import ValidationError
 
 app = Blueprint("user", __name__, url_prefix="/users")
 
 
 def _create_user():
     data = request.json
+    user_schema = CreateUserSchema
+    try:
+        user_schema.load(request.json)
+    except ValidationError as exc:
+        return exc.messages, HTTPStatus.UNPROCESSABLE_ENTITY
+
     user = User(
         username=data["username"],
         password=bcrypt.generate_password_hash(data["password"]),
@@ -20,30 +27,22 @@ def _create_user():
     )
     db.session.add(user)
     db.session.commit()
+    return {"message": "User created!"}, HTTPStatus.CREATED
 
 
+@jwt_required()
+@requires_role("admin")
 def _list_users():
     query = db.select(User)
     users = db.session.execute(query).scalars()
     users_schema = UserSchema(many=True)
     return users_schema.dump(users)
-    # return [
-    #     {
-    #         "id": user.id,
-    #         "username": user.username,
-    #         "role": {"id": user.role.id, "name": user.role.name},
-    #     }
-    #     for user in users
-    # ]
 
 
 @app.route("/", methods=["GET", "POST"])
-@jwt_required()
 def list_or_create_user():
-    requires_role("admin")
     if request.method == "POST":
-        _create_user()
-        return {"message": "User created!"}, HTTPStatus.CREATED
+        return _create_user()
     else:
         return {"users": _list_users()}
 
@@ -79,4 +78,4 @@ def delete_user(user_id):
     user = db.get_or_404(User, user_id)
     db.session.delete(user)
     db.session.commit()
-    return "", HTTPStatus.NO_CONTENT
+    return {'"", HTTPStatus.NO_CONTENT'}
