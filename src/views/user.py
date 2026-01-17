@@ -1,14 +1,15 @@
 from ..app import ma
 from marshmallow import fields
+from ..models.user import User
 
 
-class UserSchema(ma.Schema):
+class UserSchema(ma.SQLAlchemySchemaAutoSchema):
     class Meta:
-        fields = ("id", "username")
+        model = User
         include_fk = True
 
 
 class CreateUserSchema(ma.Schema):
     username = fields.String(required=True)
     password = fields.String(required=True)
-    password = fields.Integer(required=True)
+    password = fields.Integer(required=True, strict=True)

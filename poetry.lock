@@ -520,6 +520,27 @@ docs = ["autodocsumm (==0.2.14)", "furo (==2025.12.19)", "sphinx (==8.2.3)", "sp
 tests = ["pytest", "simplejson"]
 
 [[package]]
+name = "marshmallow-sqlalchemy"
+version = "1.4.2"
+description = "SQLAlchemy integration with the marshmallow (de)serialization library"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "marshmallow_sqlalchemy-1.4.2-py3-none-any.whl", hash = "sha256:65aee301c4601e76a2fdb02764a65c18913afba2a3506a326c625d13ab405b40"},
+    {file = "marshmallow_sqlalchemy-1.4.2.tar.gz", hash = "sha256:6410304bf98ec26ea35f3f9d3cee82e51fd093c434612add32a0bdcdb5668f7c"},
+]
+
+[package.dependencies]
+marshmallow = ">=3.18.0"
+SQLAlchemy = ">=1.4.40,<3.0"
+
+[package.extras]
+dev = ["marshmallow-sqlalchemy[tests]", "pre-commit (>=3.5,<5.0)", "tox"]
+docs = ["furo (==2024.8.6)", "sphinx (==8.2.3) ; python_version >= \"3.11\"", "sphinx-copybutton (==0.5.2)", "sphinx-design (==0.6.1)", "sphinx-issues (==5.0.0)", "sphinxext-opengraph (==0.10.0)"]
+tests = ["pytest (<9)", "pytest-lazy-fixtures"]
+
+[[package]]
 name = "packaging"
 version = "25.0"
 description = "Core utilities for Python packages"
@@ -821,4 +842,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<4"
-content-hash = "86b658d5cc07b76bb471a757f8f4be5f3b2475a45ca32e8389f8884a98f44cd8"
+content-hash = "6129dfc28cb6e55d68c70fa43b9bd989aa511b342f9a55e7790dd56ba3514c88"
