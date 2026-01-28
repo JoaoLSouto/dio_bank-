@@ -260,3 +260,20 @@ poetry.toml
 pyrightconfig.json
 
 # End of https://www.toptal.com/developers/gitignore/api/python,flask
+
+
+# Additional Database files
+*.db
+*.sqlite
+
+# IDEs
+.vscode/
+.idea/
+
+# Operating System
+.DS_Store
+Thumbs.db
+
+# Migration cache
+migrations/__pycache__/
+migrations/versions/__pycache__/
